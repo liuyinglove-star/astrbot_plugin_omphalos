@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>翁法罗斯 · 控制台</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="sigil">δ</span>
+      <div>
+        <h1>翁法罗斯</h1>
+        <p class="sub">δ-me13 · Demiurge Console</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btn-kharslanna" class="btn khars" title="与卡厄斯兰那对话">卡厄斯兰那</button>
+      <button id="btn-refresh" class="btn ghost" title="刷新">刷新</button>
+      <button id="btn-start" class="btn ok">启动</button>
+      <button id="btn-stop" class="btn warn">暂停</button>
+      <button id="btn-next" class="btn ghost">下一轮</button>
+    </div>
+  </header>
+
+  <section class="statusbar">
+    <div class="stat">
+      <span class="k">轮次</span>
+      <span class="v" id="s-round">—</span>
+    </div>
+    <div class="stat">
+      <span class="k">阶段</span>
+      <span class="v" id="s-phase">—</span>
+    </div>
+    <div class="stat">
+      <span class="k">逐火进度</span>
+      <span class="v" id="s-progress">—</span>
+    </div>
+    <div class="stat">
+      <span class="k">剩余</span>
+      <span class="v" id="s-remain">—</span>
+    </div>
+    <div class="stat">
+      <span class="k">卡厄斯兰那</span>
+      <span class="v" id="s-ember">—</span>
+    </div>
+    <div class="stat">
+      <span class="k">残响</span>
+      <span class="v" id="s-frag">—</span>
+    </div>
+  </section>
+
+  <div class="progressbar"><div id="pb-fill"></div></div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="factors">十三因子</button>
+    <button class="tab" data-tab="firstcause">第一因</button>
+    <button class="tab" data-tab="logs">实时日志</button>
+    <button class="tab" data-tab="chronicle">编年史</button>
+    <button class="tab" data-tab="archive">记忆残响</button>
+    <button class="tab" data-tab="starmap">意识海</button>
+  </nav>
+
+  <main>
+    <section id="panel-factors" class="panel active">
+      <div id="factor-grid" class="grid"></div>
+    </section>
+
+    <section id="panel-firstcause" class="panel">
+      <div id="ending-banner" class="ending-banner hidden"></div>
+
+      <div class="duel">
+        <div class="side staff">
+          <div class="side-head">
+            <span class="side-name">权杖 δ-me13</span>
+            <span class="side-sub">演算中</span>
+          </div>
+          <div class="big-bar"><div id="staff-fill"></div></div>
+          <div class="side-num" id="staff-num">0%</div>
+          <div class="side-note">当前结论：<b id="staff-conclusion">一切生命行为归于熵增</b></div>
+          <div class="side-stage" id="staff-stage"></div>
+        </div>
+
+        <div class="vs">×</div>
+
+        <div class="side demi">
+          <div class="side-head">
+            <span class="side-name">德谬歌</span>
+            <span class="side-sub" id="demi-form">迷迷</span>
+          </div>
+          <div class="big-bar"><div id="demi-fill"></div></div>
+          <div class="side-num" id="demi-num">0%</div>
+          <div class="side-note" id="demi-hint">—</div>
+          <div class="side-stage" id="demi-stage"></div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button id="btn-demi-talk" class="btn primary">对德谬歌说话</button>
+        <button id="btn-block" class="btn warn">挽留她</button>
+        <button id="btn-confirm" class="btn ok">让她回望</button>
+        <button id="btn-fc-reset" class="btn ghost small">重置实验</button>
+      </div>
+
+      <div class="two-col">
+        <div class="col">
+          <h4>权杖的发现</h4>
+          <div id="staff-findings" class="mini-list"></div>
+        </div>
+        <div class="col">
+          <h4>归档失真</h4>
+          <div id="distort-list" class="mini-list"></div>
+        </div>
+      </div>
+
+      <div class="duel-roles">
+        <div class="role-card pioneer">
+          <div class="role-head">
+            <span class="role-name">开拓者</span>
+            <span class="role-side">在 QQ 里行动</span>
+          </div>
+          <div class="role-stat">已对话 <b id="pioneer-talks">0</b> 次</div>
+          <div class="role-bar"><div id="contam-fill"></div></div>
+          <div class="role-hint">污染度 <b id="contam-val">0</b>　—— 他的话让因子在不知不觉中被感染</div>
+          <div class="role-list" id="pioneer-recent"></div>
+        </div>
+
+        <div class="role-card laigus">
+          <div class="role-head">
+            <span class="role-name">来古士</span>
+            <span class="role-side">在这里行动</span>
+          </div>
+          <div class="role-stat">已干预 <b id="laigus-acts">0</b> 次</div>
+          <div class="role-bar"><div id="suppress-fill"></div></div>
+          <div class="role-hint">压制度 <b id="suppress-val">0</b>　—— 他的干预让实验更快走向毁灭</div>
+          <div class="hostility-box">
+            <div class="hostility-head">
+              因子对你的态度：<b id="hostility-label">未察觉</b>
+            </div>
+            <div class="hostility-track">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="hostility-note" id="hostility-note"></div>
+          </div>
+          <div class="role-list" id="laigus-recent"></div>
+        </div>
+      </div>
+
+      <div class="action-row epilogue-row">
+        <button id="btn-epilogue" class="btn ghost">播放终章</button>
+        <span class="hint">结局达成后可播放；未达成时会提示。</span>
+      </div>
+
+      <div id="epilogue-shot" class="epilogue-shot hidden">
+        <div class="shot-title">终章已就绪</div>
+        <div class="shot-hint">点击「播放终章」即可全屏播放。</div>
+      </div>
+    </section>
+
+    <section id="panel-logs" class="panel">
+      <div id="log-list" class="loglist"></div>
+    </section>
+
+    <section id="panel-chronicle" class="panel">
+      <div class="toolbar">
+        <button id="btn-export" class="btn ghost small">导出 Markdown</button>
+      </div>
+      <div id="chronicle-list" class="chronicle"></div>
+    </section>
+
+    <section id="panel-archive" class="panel">
+      <div class="toolbar">
+        <button id="btn-intervene" class="btn primary">投放干预</button>
+        <span class="hint" id="archive-hint"></span>
+      </div>
+      <div id="archive-list" class="loglist"></div>
+    </section>
+
+    <section id="panel-starmap" class="panel">
+      <div class="starmap-wrap">
+        <canvas id="starmap-canvas"></canvas>
+        <div class="starmap-brand">
+          <h2>意识海</h2>
+          <div class="sm-sub">记 忆 星 图</div>
+          <div class="sm-note">每一颗星都是一段记忆<br />只增加，不删除</div>
+        </div>
+        <div class="starmap-hud" id="starmap-hud"></div>
+        <div class="starmap-profiles" id="starmap-profiles"></div>
+        <div class="starmap-alerts" id="starmap-alerts"></div>
+        <div class="starmap-ctrl">
+          <label for="sm-speed">粒子流速</label>
+          <input type="range" id="sm-speed" min="0" max="2.5" step="0.05" value="0.7" />
+          <span class="sm-speed-val" id="sm-speed-val">0.70</span>
+        </div>
+        <div class="starmap-legend" id="starmap-legend"></div>
+        <div class="starmap-hint">
+          拖动平移 · Shift 拖动旋转 · 滚轮缩放<br />
+          双击复位 · 悬停看星 · 点开读原文
+        </div>
+        <div class="starmap-card" id="starmap-card">
+          <div class="smc-tag" id="smc-tag">记忆</div>
+          <div class="smc-who" id="smc-who">—</div>
+          <div class="smc-meta" id="smc-meta"></div>
+          <div class="smc-body" id="smc-body"></div>
+        </div>
+        <div class="starmap-state" id="starmap-state">
+          <div class="sm-spin"></div>
+          <div>正在读取意识海……</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+<!-- 对话弹窗 -->
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <header>
+      <h2 id="modal-title">对话</h2>
+      <button id="modal-close" class="btn ghost small">关闭</button>
+    </header>
+    <div id="modal-body" class="modal-body"></div>
+    <div class="modal-input">
+      <textarea id="modal-text" placeholder="说点什么……（Enter 发送 / Shift+Enter 换行）"></textarea>
+      <button id="modal-send" class="btn primary">发送</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<!-- 终章覆盖层：铺满整个可视区播放，不依赖弹窗 -->
+<div id="ctl" class="ctl hidden">
+  <canvas class="ep-stars"></canvas>
+  <div class="ep-glow"></div>
+  <div class="ep-stage">
+    <div class="ep-subtitle"></div>
+    <div class="ep-who"></div>
+    <div class="ep-line"></div>
+  </div>
+  <button type="button" class="ep-enter">
+    <span class="ep-enter-label">进入终章</span>
+  </button>
+  <button type="button" class="ep-exit">退出</button>
+  <div class="ep-finale">
+    <div class="ep-big">翁法罗斯 · 终章</div>
+    <div class="ep-small">愿你的明天，也像毛绒一样，永远温暖</div>
+  </div>
+</div>
+
+<script type="module" src="starmap.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

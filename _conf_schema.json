@@ -1,0 +1,77 @@
+{
+    "round_minutes": {
+        "description": "每轮时长（分钟）",
+        "type": "int",
+        "hint": "每到时间，因子全部归零，德谬歌归档本轮的野史，然后开始下一轮",
+        "slider": {
+            "min": 1,
+            "max": 120,
+            "step": 1
+        },
+        "default": 15
+    },
+    "auto_start": {
+        "description": "插件加载后自动启动模拟",
+        "type": "bool",
+        "hint": "关闭后需要手动发送 /omphalos start",
+        "default": true
+    },
+    "provider_id": {
+        "description": "使用的模型 Provider ID",
+        "type": "string",
+        "hint": "留空则使用 AstrBot 当前默认模型。建议填一个有额度的，例如 bailian/deepseek-v4-pro-0813",
+        "default": "bailian/deepseek-v4-pro-0813"
+    },
+    "private_talk": {
+        "description": "私聊里直接和德谬歌说话",
+        "type": "bool",
+        "hint": "开启后管理员私聊机器人时，每条不以 / 开头的消息都会交给德谬歌（开拓者视角）。注意这会接管私聊里的普通消息，不用时请关闭",
+        "default": false
+    },
+    "cyrene_voice": {
+        "description": "终章播放昔涟的语音",
+        "type": "bool",
+        "hint": "需要本地 GPT-SoVITS 服务在 127.0.0.1:9880 运行；合成失败会自动降级为纯文字",
+        "default": true
+    },
+    "memory_rounds": {
+        "description": "残响保留轮数",
+        "type": "int",
+        "hint": "德谬歌只记得最近这么多轮的事；更早的碎片沉入岁月史书，不再参与 prompt",
+        "slider": {
+            "min": 1,
+            "max": 30,
+            "step": 1
+        },
+        "default": 6
+    },
+    "memory_cap": {
+        "description": "活跃残响上限（条）",
+        "type": "int",
+        "hint": "参与 prompt 的碎片总量硬上限，超出部分自动沉淀。控制这个值就能控制每轮 token 成本",
+        "slider": {
+            "min": 20,
+            "max": 500,
+            "step": 10
+        },
+        "default": 120
+    },
+    "cyrene_ref_root": {
+        "description": "昔涟参考音频根目录",
+        "type": "string",
+        "hint": "目录下按情绪分子目录（如 温柔/ref.wav、悲伤/ref.wav），同目录放 asr.txt 写转录。留空则终章不播放语音",
+        "default": ""
+    },
+    "cyrene_gpt_weights": {
+        "description": "GPT-SoVITS 的 GPT 模型权重",
+        "type": "string",
+        "hint": "训练好的 .ckpt 文件路径，例如 GPT_weights_v2/xxx-e14.ckpt",
+        "default": ""
+    },
+    "cyrene_sovits_weights": {
+        "description": "GPT-SoVITS 的 SoVITS 模型权重",
+        "type": "string",
+        "hint": "训练好的 .pth 文件路径，例如 SoVITS_weights_v2/xxx_e8_s4384.pth",
+        "default": ""
+    }
+}

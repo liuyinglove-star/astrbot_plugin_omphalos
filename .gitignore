@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+
+# 运行时数据（含私人推演记录，不要提交）
+*.json.tmp
+Demiurge_Archives.json
+omphalos_state.json
+omphalos_state.json.bak_*
+data/
+plugin_data/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志
+*.log
+_restart.out
+_restart.bat
+
+# 本地临时产物
+*.tmp
+*_backup_*/
