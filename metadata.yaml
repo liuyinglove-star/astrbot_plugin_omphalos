@@ -3,7 +3,7 @@ desc: 翁法罗斯因子模拟 —— 以德谬歌为容器、十三位因子为
 short_desc: 十五分钟一轮的翁法罗斯因子模拟，可干预可对话
 version: v1.1.0
 author: 林墨
-repo: https://github.com/<YOUR_GITHUB_USER>/astrbot_plugin_omphalos
+repo: https://github.com/liuyinglove-star/astrbot_plugin_omphalos
 help: |
   【翁法罗斯模拟】
   /omphalos start      启动轮回推演
