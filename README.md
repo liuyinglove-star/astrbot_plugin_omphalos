@@ -41,11 +41,17 @@ _🪶 翁法罗斯因子模拟 🪶_
 AstrBot/
 └── data/plugins/
     └── astrbot_plugin_omphalos/
-        ├── main.py
-        ├── metadata.yaml
-        ├── _conf_schema.json
+        ├── main.py                主入口
+        ├── webapi.py              WebUI 接口
+        ├── metadata.yaml          插件元信息
+        ├── _conf_schema.json      配置项声明
+        ├── __init__.py
         ├── README.md
-        └── core/
+        ├── LICENSE
+        ├── core/                  业务逻辑（13 个模块）
+        └── pages/                 控制台与终章前端
+            ├── console/           翁法罗斯控制台
+            └── epilogue/          终章页
 ```
 
 ## 核心机制
@@ -283,6 +289,7 @@ astrbot_plugin_omphalos/
 │   ├── journey.py          阶段推演、权柄顺序、随机事件
 │   ├── memory_filter.py    碎片权重筛选（防 prompt 撑爆）
 │   ├── roles.py            双身份：QQ=开拓者 / WebUI=来古士
+│   ├── starmap.py          意识海星图：把记忆映射成 8 字形星图数据
 │   ├── state.py            状态机、原子写、容量上限
 │   ├── voice.py            昔涟音色（本地 GPT-SoVITS）
 │   └── wishes.py           结局时十二位黄金裔的祝福
